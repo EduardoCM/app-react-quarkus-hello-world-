@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Registros from './Registros';
 
 
 class RegistroTarjeta extends Component {
@@ -14,6 +14,8 @@ class RegistroTarjeta extends Component {
             cvv: ""
         }
     }
+
+
 
     registrarTarjeta = (e) => {
         e.preventDefault();
@@ -37,15 +39,29 @@ class RegistroTarjeta extends Component {
         .then(json => {
             console.log("Creacion de tarjeta de forma correcta");
             console.log(json)
+            this.limpiarDatos();
         })
+    }
+
+
+    limpiarDatos = () => {
+        console.log("Limpia datos del formulario");
+        this.setState({cardHolderName: ""})
+        this.setState({creditCardNumber: ""})
+        this.setState({expirationDate: ""})
+        this.setState({paymentNetworks: ""})
+        this.setState({cvv: ""})
+
+        console.log("Datos limpios")
     }
 
 
     render (){
         return (
-            
+        <div>
             <form onSubmit={this.registrarTarjeta}>
                 <h1>Registrar tarjeta de Credito</h1>
+               
                 <div>
                     <label>Card Holder Name</label>
                     <input type="text" 
@@ -92,6 +108,12 @@ class RegistroTarjeta extends Component {
 
                 <input type="submit" value="Enviar" />
             </form>
+
+            <Registros />
+
+            </div>
+
+         
         )
     }
 
